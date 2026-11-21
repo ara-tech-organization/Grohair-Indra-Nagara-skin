@@ -3,13 +3,14 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     tailwindcss(),
     react()
   ],
-  base: '/Grohair-Warangal-skin/',
+  // 'hostinger' build serves from /skin/; default is GitHub Pages
+  base: mode === 'hostinger' ? '/skin/' : '/Grohair-Tirupatur-skin/',
   build: {
     outDir: 'dist'
   }
-})
+}))

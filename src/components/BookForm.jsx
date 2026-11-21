@@ -10,18 +10,26 @@ const treatmentOptions = [
   'Other',
 ]
 
+// CLIENT code for this clinic's webhook subdomain.
+const WEBHOOK_URL = 'https://tirupattur.discovertechnologies.co/api/v1/integrations/webhooks/website'
+// One id per page load, so a double submit is recognised as the same lead.
+const submissionId = crypto.randomUUID()
+
 export default function BookForm({
   formId = 'book-form',
   className = 'bg-white border border-[#E5E7EB] shadow-[0_8px_24px_rgba(0,0,0,0.08)] p-6 rounded-2xl text-left',
 }) {
   const navigate = useNavigate()
   const [status, setStatus] = useState('idle') // idle | sending | error
-  const [form, setForm] = useState({ name: '', city: '', phone: '', treatment: '' })
+  const [errorMsg, setErrorMsg] = useState('')
+  const [form, setForm] = useState({ name: '', city: '', phone: '', treatment: '', _gotcha: '' })
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
   async function handleSubmit(e) {
     e.preventDefault()
+
+    if (status === 'sending') return
 
     if (!form.name || !form.city || !form.phone || !form.treatment) {
       alert('Please fill all required fields')
@@ -34,20 +42,20 @@ export default function BookForm({
     }
 
     setStatus('sending')
+    setErrorMsg('')
     try {
-      const now = new Date()
       const payload = {
         name: form.name,
-        email: 'N/A',
         phone: form.phone,
-        date: now.toLocaleDateString('en-IN', { year: 'numeric', month: '2-digit', day: '2-digit' }),
-        time: now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true }),
+        city: form.city,
         treatment: form.treatment,
-        message: `City: ${form.city}`,
-        source: 'Grohair Warangal Skin Clinic Landing Page',
+        message: `City: ${form.city} | Treatment: ${form.treatment}`,
+        _gotcha: form._gotcha,
+        submission_id: submissionId,
+        form_id: window.location.pathname,
       }
 
-      const res = await fetch('https://adgrohairclinicmogappair.com/api/email.php', {
+      const res = await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,12 +63,13 @@ export default function BookForm({
         body: JSON.stringify(payload),
       })
 
-      const data = await res.json()
-      if (data.success) {
+      if (res.ok) {
         window.dataLayer = window.dataLayer || []
         window.dataLayer.push({ event: 'lead_form_submitted' })
         navigate('/thankyou')
       } else {
+        console.error('Webhook status:', res.status)
+        setErrorMsg(res.status === 429 ? 'Too many tries, please wait a few minutes.' : '')
         setStatus('error')
       }
     } catch (error) {
@@ -73,6 +82,13 @@ export default function BookForm({
     <form id={formId} onSubmit={handleSubmit} className={className}>
       <h3 className="text-center text-[20px] font-extrabold text-[#1A1A1A] mb-5">Book Your Consultation</h3>
   
+      {/* Spam trap: hidden from people, bots tend to fill it */}
+      <input
+        type="text" name="_gotcha" value={form._gotcha} onChange={handleChange}
+        tabIndex={-1} autoComplete="off" aria-hidden="true"
+        style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+      />
+
       <input
         type="text" name="name" value={form.name} onChange={handleChange}
         placeholder="Enter your name" required
@@ -113,7 +129,7 @@ export default function BookForm({
       </p>
   
       {status === 'error' && (
-        <p className="text-red-600 text-[12px] text-center mt-2">Something went wrong. Please try again.</p>
+        <p className="text-red-600 text-[12px] text-center mt-2">{errorMsg || 'Something went wrong. Please try again.'}</p>
       )}
   
       <button

@@ -1,12 +1,13 @@
 {
   "name": "react",
   "private": true,
-  "homepage": "/Grohair-Warangal-skin/",
+  "homepage": "/Grohair-Tirupatur-skin/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --mode hostinger",
+    "build:hostinger": "vite build --mode hostinger",
     "lint": "eslint .",
     "preview": "vite preview"
   },

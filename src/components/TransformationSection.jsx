@@ -2,10 +2,10 @@ import { useState, useEffect, useRef } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 
 const reviews = [
-  { name: "Sneha Raji", time: 'GloSkin client', avatar: 'SR', color: '#c0001a', text: "Never thought I'd love my skin this much. Every session was pure magic — the glow is real." },
-  { name: "Bhavik Kumar", time: 'GroHair client', avatar: 'BK', color: '#7c3aed', text: "Professional, clean, and deeply caring. Warangal needed a place like this. Blessings!" },
-  { name: "Meera Laxmi", time: 'Acne care patient', avatar: 'ML', color: '#0891b2', text: "Doctor explained every detail with patience. My acne is gone and my confidence is back." },
-  { name: "Harish V", time: 'Hair restoration patient', avatar: 'HV', color: '#059669', text: "From bald spots to full locks — what a transformation! Truly life-changing care." },
+  { name: "Ragavi R", time: 'Google review', avatar: 'RR', color: '#c0001a', text: "Excellent experience at Advanced Gro Hair & Skin Clinic — the doctor and staff are very professional and friendly. The overall atmosphere is very clean and welcoming. Highly recommended for hair and skin treatment." },
+  { name: "Manoj Pradap", time: 'Google review', avatar: 'MP', color: '#7c3aed', text: "Dr. Anita explained my skin and hair health in simple, everyday terms rather than confusing medical terms, making it incredibly easy to understand. They have advanced AI skin analysis and guided me on useful advanced treatments. Highly recommend!" },
+  { name: "Sindhu Sri", time: 'Google review', avatar: 'SS', color: '#0891b2', text: "My first time consulting about skin and hair — I gained so much knowledge, took a skin test, and learned the do's and don'ts to follow in my routine. Anyone with skin and hair issues should visit and get it treated." },
+  { name: "Kokila Devaraj", time: 'Google review', avatar: 'KD', color: '#059669', text: "Great atmosphere, friendly staff, and excellent hair & skincare service. Highly recommended!" },
 ]
 
 const Stars = () => (

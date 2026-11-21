@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import logoImg from '../assets/Logo.png'
+import logoImg from '../assets/Logo.webp'
 
 const navItems = [
   { path: '/', label: 'Home' },
@@ -25,12 +25,12 @@ export default function Header() {
   return (
     <header className="relative flex items-center justify-between px-4 py-0.5 bg-white border-b border-gray-200 sticky top-0 z-50">
       {/* Logo */}
-      <img src={logoImg} alt="Advanced GroSkin & GloSkin" style={{ height: '55px', width: 'auto', minWidth: '80px', objectFit: 'contain' }} />
+      <img src={logoImg} alt="Advanced GroHair & GloSkin Indiranagar" style={{ height: '55px', width: 'auto', minWidth: '80px', objectFit: 'contain' }} />
 
       <div className="flex items-center gap-4 h-full" ref={menuRef}>
         {/* Phone icon button */}
         <a
-          href="tel:+919418856789"
+          href="tel:+918497856789"
           aria-label="Call us"
           onClick={() => {
             window.dataLayer = window.dataLayer || [];
