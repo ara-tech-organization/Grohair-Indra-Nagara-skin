@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
     react()
   ],
   // 'hostinger' build serves from /skin/; default is GitHub Pages
-  base: mode === 'hostinger' ? '/skin/' : '/Grohair-Tirupatur-skin/',
+  base: mode === 'hostinger' ? '/skin/' : '/Grohair-Indra-Nagara-skin/',
   build: {
     outDir: 'dist'
   }
