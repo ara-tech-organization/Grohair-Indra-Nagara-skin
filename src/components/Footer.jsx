@@ -38,12 +38,12 @@ export default function Footer() {
 
         <div className="flex flex-col gap-3">
           <h4 className="text-[14px] font-semibold text-white mb-1">Contact Us</h4>
-          <a href="mailto:advancegrohairgloskintpt@gmail.com" className="flex items-center gap-2.5 text-[13px] text-white/55 hover:text-red-400 active:text-red-400 transition-colors">
+          <a href="mailto:indiranagar@adgrohair.com" className="flex items-center gap-2.5 text-[13px] text-white/55 hover:text-red-400 active:text-red-400 transition-colors">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-4 h-4 shrink-0">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>
             </svg>
-            <span>advancegrohairgloskintpt@gmail.com</span>
+            <span>indiranagar@adgrohair.com</span>
           </a>
           <a href="tel:+918497856789" className="flex items-center gap-2.5 text-[13px] text-white/55 hover:text-red-400 active:text-red-400 transition-colors">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-4 h-4 shrink-0">
